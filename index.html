@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TRACK//OS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="authScreen" class="auth-screen">
+
+    <div class="auth-grid"></div>
+
+    <div class="auth-box">
+
+        <div class="auth-logo">
+            <span>TRACK</span><b>//OS</b>
+        </div>
+
+        <div class="auth-subtitle">
+            PERSONAL PROGRESS SYSTEM
+        </div>
+
+        <div class="auth-form">
+
+            <input
+                type="email"
+                id="email"
+                placeholder="EMAIL"
+                autocomplete="email"
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="PASSWORD"
+                autocomplete="current-password"
+            >
+
+            <button id="authButton">
+                INITIALIZE SESSION
+            </button>
+
+            <button id="switchAuth" class="secondary-button">
+                CREATE ACCOUNT
+            </button>
+
+            <p id="authMessage"></p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="app" class="app hidden">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <span>TRACK</span><b>//OS</b>
+        </div>
+
+        <div class="system-status">
+            <span class="status-dot"></span>
+            SYSTEM ONLINE
+        </div>
+
+        <nav>
+
+            <button class="nav-item active" data-page="dashboard">
+                <span>01</span>
+                DASHBOARD
+            </button>
+
+            <button class="nav-item" data-page="daily">
+                <span>02</span>
+                DAILY LOG
+            </button>
+
+            <button class="nav-item" data-page="skills">
+                <span>03</span>
+                SKILLS
+            </button>
+
+            <button class="nav-item" data-page="goals">
+                <span>04</span>
+                GOALS
+            </button>
+
+            <button class="nav-item" data-page="history">
+                <span>05</span>
+                HISTORY
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="user-block">
+                <div class="user-icon">W</div>
+
+                <div>
+                    <small>ACCOUNT</small>
+                    <p id="userEmail">USER</p>
+                </div>
+            </div>
+
+            <button id="logoutButton" class="logout">
+                DISCONNECT
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <div class="eyebrow">PERSONAL TRACKING SYSTEM</div>
+                <h1 id="pageTitle">DASHBOARD</h1>
+            </div>
+
+            <div class="topbar-right">
+                <div id="currentDate"></div>
+
+                <button id="quickEntryButton" class="cyan-button">
+                    + QUICK ENTRY
+                </button>
+            </div>
+
+        </header>
+
+
+        <section id="dashboardPage" class="page active-page">
+
+            <div class="hero-row">
+
+                <div class="hero-copy">
+                    <div class="eyebrow">CURRENT STATUS</div>
+                    <h2>KEEP<br><span>MOVING.</span></h2>
+
+                    <p>
+                        Track the work. See the pattern.
+                        Build the version of yourself you actually want.
+                    </p>
+                </div>
+
+                <div class="focus-ring">
+
+                    <div class="ring">
+                        <div>
+                            <strong id="todayHours">0h</strong>
+                            <small>TODAY</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="metric-grid">
+
+                <div class="metric">
+                    <span>FOCUS</span>
+                    <strong id="focusValue">0h 00m</strong>
+                    <small>TODAY</small>
+                </div>
+
+                <div class="metric">
+                    <span>CODING</span>
+                    <strong id="codingValue">0h 00m</strong>
+                    <small>TODAY</small>
+                </div>
+
+                <div class="metric">
+                    <span>TYPING</span>
+                    <strong id="typingValue">0 WPM</strong>
+                    <small id="accuracyValue">0% ACCURACY</small>
+                </div>
+
+                <div class="metric">
+                    <span>TASKS</span>
+                    <strong id="tasksValue">0 / 0</strong>
+                    <small id="taskPercent">0% COMPLETE</small>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+                <section class="panel activity-panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <div class="eyebrow">ACTIVITY</div>
+                            <h3>LAST 7 DAYS</h3>
+                        </div>
+                    </div>
+
+                    <div id="activityChart" class="activity-chart"></div>
+
+                </section>
+
+
+                <section class="panel streak-panel">
+
+                    <div class="eyebrow">CONSISTENCY</div>
+
+                    <div class="streak-number" id="streakValue">
+                        0
+                    </div>
+
+                    <div class="streak-label">
+                        DAY STREAK
+                    </div>
+
+                    <div class="streak-line">
+                        <span></span>
+                    </div>
+
+                    <p>
+                        Consistency beats intensity.
+                    </p>
+
+                </section>
+
+            </div>
+
+
+            <section class="panel recent-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <div class="eyebrow">LOG</div>
+                        <h3>RECENT ACTIVITY</h3>
+                    </div>
+
+                </div>
+
+                <div id="recentActivity"></div>
+
+            </section>
+
+        </section>
+
+
+        <section id="dailyPage" class="page">
+
+            <div class="section-heading">
+                <div class="eyebrow">TODAY'S RECORD</div>
+                <h2>DAILY LOG</h2>
+            </div>
+
+            <form id="dailyForm" class="entry-layout">
+
+                <div class="panel entry-panel">
+
+                    <div class="panel-title">
+                        TIME TRACKING
+                    </div>
+
+                    <div class="form-grid">
+
+                        <label>
+                            FOCUS
+                            <input type="number" id="focusInput" min="0" placeholder="Minutes">
+                        </label>
+
+                        <label>
+                            CODING
+                            <input type="number" id="codingInput" min="0" placeholder="Minutes">
+                        </label>
+
+                        <label>
+                            CT
+                            <input type="number" id="ctInput" min="0" placeholder="Minutes">
+                        </label>
+
+                        <label>
+                            ACT
+                            <input type="number" id="actInput" min="0" placeholder="Minutes">
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel entry-panel">
+
+                    <div class="panel-title">
+                        TYPING
+                    </div>
+
+                    <div class="form-grid">
+
+                        <label>
+                            WPM
+                            <input type="number" id="wpmInput" min="0">
+                        </label>
+
+                        <label>
+                            ACCURACY %
+                            <input type="number" id="accuracyInput" min="0" max="100" step="0.01">
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel entry-panel">
+
+                    <div class="panel-title">
+                        CODE OUTPUT
+                    </div>
+
+                    <div class="form-grid">
+
+                        <label>
+                            HTML LOC
+                            <input type="number" id="htmlInput" min="0">
+                        </label>
+
+                        <label>
+                            CSS LOC
+                            <input type="number" id="cssInput" min="0">
+                        </label>
+
+                        <label>
+                            JS LOC
+                            <input type="number" id="jsInput" min="0">
+                        </label>
+
+                        <label>
+                            PYTHON LOC
+                            <input type="number" id="pythonInput" min="0">
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel entry-panel">
+
+                    <div class="panel-title">
+                        TASKS
+                    </div>
+
+                    <div class="form-grid">
+
+                        <label>
+                            COMPLETED
+                            <input type="number" id="completedInput" min="0">
+                        </label>
+
+                        <label>
+                            TOTAL
+                            <input type="number" id="totalInput" min="0">
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel entry-panel full-width">
+
+                    <label>
+                        NOTES
+                        <textarea id="notesInput" placeholder="What happened today?"></textarea>
+                    </label>
+
+                </div>
+
+
+                <button class="save-button" type="submit">
+                    SAVE DAILY RECORD
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <section id="skillsPage" class="page">
+
+            <div class="section-heading">
+                <div class="eyebrow">DEVELOPMENT</div>
+                <h2>SKILL OUTPUT</h2>
+            </div>
+
+            <div class="skill-list">
+
+                <div class="skill-row">
+                    <div>
+                        <span>HTML</span>
+                        <small id="htmlTotal">0 LOC</small>
+                    </div>
+                    <div class="skill-track">
+                        <div id="htmlBar"></div>
+                    </div>
+                </div>
+
+                <div class="skill-row">
+                    <div>
+                        <span>CSS</span>
+                        <small id="cssTotal">0 LOC</small>
+                    </div>
+                    <div class="skill-track">
+                        <div id="cssBar"></div>
+                    </div>
+                </div>
+
+                <div class="skill-row">
+                    <div>
+                        <span>JAVASCRIPT</span>
+                        <small id="jsTotal">0 LOC</small>
+                    </div>
+                    <div class="skill-track">
+                        <div id="jsBar"></div>
+                    </div>
+                </div>
+
+                <div class="skill-row">
+                    <div>
+                        <span>PYTHON</span>
+                        <small id="pythonTotal">0 LOC</small>
+                    </div>
+                    <div class="skill-track">
+                        <div id="pythonBar"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="goalsPage" class="page">
+
+            <div class="section-heading">
+                <div class="eyebrow">LONG TERM</div>
+                <h2>GOALS</h2>
+            </div>
+
+            <form id="goalForm" class="goal-form">
+
+                <input id="goalTitle" placeholder="GOAL NAME" required>
+
+                <input id="goalCategory" placeholder="CATEGORY" value="General">
+
+                <input id="goalTarget" type="number" min="1" placeholder="TARGET" required>
+
+                <input id="goalUnit" placeholder="UNIT" value="hours">
+
+                <button type="submit" class="cyan-button">
+                    ADD GOAL
+                </button>
+
+            </form>
+
+            <div id="goalsList" class="goals-list"></div>
+
+        </section>
+
+
+        <section id="historyPage" class="page">
+
+            <div class="section-heading">
+                <div class="eyebrow">ARCHIVE</div>
+                <h2>HISTORY</h2>
+            </div>
+
+            <div class="panel history-panel">
+
+                <div class="history-head">
+                    <span>DATE</span>
+                    <span>FOCUS</span>
+                    <span>CODING</span>
+                    <span>WPM</span>
+                    <span>TASKS</span>
+                </div>
+
+                <div id="historyList"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<div id="quickModal" class="modal hidden">
+
+    <div class="modal-box">
+
+        <button id="closeModal" class="modal-close">×</button>
+
+        <div class="eyebrow">QUICK ENTRY</div>
+
+        <h2>LOG YOUR DAY</h2>
+
+        <form id="quickForm">
+
+            <label>
+                FOCUS MINUTES
+                <input id="quickFocus" type="number" min="0">
+            </label>
+
+            <label>
+                CODING MINUTES
+                <input id="quickCoding" type="number" min="0">
+            </label>
+
+            <label>
+                WPM
+                <input id="quickWpm" type="number" min="0">
+            </label>
+
+            <label>
+                ACCURACY
+                <input id="quickAccuracy" type="number" min="0" max="100">
+            </label>
+
+            <button class="save-button">
+                SAVE
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
